@@ -25,6 +25,7 @@ use App\Http\Controllers\API\LanguageController;
 use App\Http\Controllers\API\SiteSettingController;
 use App\Http\Controllers\API\SubCategoryController;
 use App\Http\Controllers\API\AdminProfileController;
+use App\Http\Controllers\API\ContactUsController;
 
 
 /*
@@ -233,6 +234,16 @@ Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user
 Route::post('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
 Route::get('/user/password/', [IndexController::class, 'UserPassword'])->name('user.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+//all contact us functions
+//admin
+Route::get('/contact_us',[ContactUsController::class,'viewAllContactUs'])->name('view.allcontactus');
+Route::get('/contact_us/{id}',[ContactUsController::class,'showSubmission'])->name('view.contactus.submission');
+Route::delete('/contact_us/{id}',[ContactUsController::class,'deleteSubmission'])->name('delete.contactus.submission');
+
+//user
+Route::post('/contact_us',[ContactUsController::class,'addContactSubmission'])->name('add.contactus.submission');
+
 
 
 
