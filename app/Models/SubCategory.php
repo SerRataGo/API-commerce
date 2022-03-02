@@ -13,9 +13,7 @@ class SubCategory extends Model
 
         'category_id',
         'subcategory_name_en',
-        'subcategory_name_es',
-        'subcategory_slug_en',
-        'subcategory_slug_es',
+        'subcategory_name_ar',
         
     ];
 

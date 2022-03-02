@@ -84,7 +84,7 @@ Route::prefix('category')->group(function(){
 
 });
 
-// category Frontend  reteun all product in this category
+// category Frontend  return all product in this category
 Route::get('subcategory/{subcat_id}', [IndexController::class, 'SubCatProduct']);
 
 // Subcategory Frontend  reteun all product in this subcategory
