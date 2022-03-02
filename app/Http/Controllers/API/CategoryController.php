@@ -32,7 +32,22 @@ class CategoryController extends Controller
 
     public function CategoryEdit($id)
     {
-        //
+        $category = Category::find($id);
+        if($category){
+            return response()->json([
+               'status'=>200,
+               'category'=>$category
+   
+            ]);
+        }
+        else {
+           return response()->json([
+               'status'=>404,
+               'message'=>'No category id found'
+   
+            ]);
+   
+        }
     }
 
     public function CategoryUpdate(Request $request, $id)
