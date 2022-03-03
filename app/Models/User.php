@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Cart;
 
 class User extends Authenticatable
 {
@@ -69,6 +70,9 @@ class User extends Authenticatable
         return Cache::has('user-is-online' . $this->id);
     }
 
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
     
 }
 

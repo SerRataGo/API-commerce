@@ -244,6 +244,14 @@ Route::delete('/contact_us/{id}',[ContactUsController::class,'deleteSubmission']
 //user
 Route::post('/contact_us',[ContactUsController::class,'addContactSubmission'])->name('add.contactus.submission');
 
+//Cart functions
+//admin
+Route::get('/cart',[CartController::class,'viewAllCarts']);
+//user's cart functions 
+Route::post('/cart/{product_id}',[CartController::class,'addProductToCart']);
+Route::get('/user/cart',[CartController::class,'MyCart']);
+Route::delete('/cart/{product_id}',[CartController::class,'RemoveCartProduct']);
+
 
 
 
