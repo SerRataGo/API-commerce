@@ -106,6 +106,12 @@ class ProductController extends Controller
 
     public function ShowProduct($id)
     {
+        $product = Product::all();
+        return response()->json([
+        'status'=>200,
+        'product'=>$product
+
+        ]);
         
     }
 
