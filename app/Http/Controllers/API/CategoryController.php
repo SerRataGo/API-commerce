@@ -57,6 +57,21 @@ class CategoryController extends Controller
 
     public function CategoryDelete($id)
     {
-        //
+        $category = Category::find($id);
+        if($category){
+            $category->delete();
+
+            return response()->json([
+                'status'=>200,
+                'message'=>'category deleted succesfully'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'category ID not found'
+            ]);
+
+        }
     }
 }
