@@ -91,7 +91,7 @@ Route::get('subcategory/{subcat_id}', [IndexController::class, 'SubCatProduct'])
 
 // Admin Products All Routes
 Route::prefix('product')->group(function(){
-
+    Route::get('/view', [ProductController::class, 'index'])->name('view.product');
     Route::get('/add', [ProductController::class, 'AddProduct'])->name('add.product');
     Route::post('/store', [ProductController::class, 'StoreProduct'])->name('store.product');
     Route::get('/manage', [ProductController::class, 'ManageProduct'])->name('manage.product');
