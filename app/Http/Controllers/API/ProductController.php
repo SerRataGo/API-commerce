@@ -25,33 +25,33 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
             'brand_id'=>'required',
              'category_id'=>'required',
-            // 'sub_category_id'=>'required',
-            // 'product_name_en'=>'required|max:191',
-            // 'product_name_ar'=>'required|max:191',
-            // 'product_code'=>'required|max:20',
-            // 'product_qty'=>'required|max:20',
-            // 'product_tags_en'=>'required|max:20',
-            // 'product_tags_ar'=>'required|max:20',
-            // 'product_size_en'=>'required|max:191',
-            // 'product_size_ar'=>'required|max:191',
-            // 'product_color_en'=>'required|max:191',
-            // 'product_color_ar'=>'required|max:191',
-            // 'selling_price'=>'required|max:20',
-            // 'discount_price'=>'required|max:20',
-            // 'short_description_en'=>'required|max:191',
-            // 'short_description_ar'=>'required|max:191',
-            // 'description_en'=>'required|max:191',
-            // 'description_ar'=>'required|max:191',
-            // 'product_thumbnail'=>'required',
-            // 'hot_deals'=>'required',
-            // 'featured'=>'required',
-            // 'special_offer'=>'required',
-            // 'special_deals'=>'required',
-            // 'digital_file'=>'required',
+            'sub_category_id'=>'required',
+            'product_name_en'=>'required|max:191',
+            'product_name_ar'=>'required|max:191',
+            'product_code'=>'required|max:20',
+            'product_qty'=>'required|max:20',
+            'product_tags_en'=>'required|max:20',
+            'product_tags_ar'=>'required|max:20',
+            'product_size_en'=>'required|max:191',
+            'product_size_ar'=>'required|max:191',
+            'product_color_en'=>'required|max:191',
+            'product_color_ar'=>'required|max:191',
+            'selling_price'=>'required|max:20',
+            'discount_price'=>'required|max:20',
+            'short_description_en'=>'required|max:191',
+            'short_description_ar'=>'required|max:191',
+            'description_en'=>'required|max:191',
+            'description_ar'=>'required|max:191',
+            'product_thumbnail'=>'required',
+            'hot_deals'=>'required',
+            'featured'=>'required',
+            'special_offer'=>'required',
+            'special_deals'=>'required',
+            'digital_file'=>'required',
 
            
             
-            //'image'=>'required|max:2048|image|mimes:png,jpg,jpeg'
+            
     
             
         ]);
@@ -106,7 +106,7 @@ class ProductController extends Controller
 
     public function ShowProduct($id)
     {
-        //
+        
     }
 
 
@@ -139,7 +139,22 @@ class ProductController extends Controller
 
     public function DeleteProduct($id)
     {
-        //
+        $product = Product::find($id);
+        if($product){
+            $product->delete();
+
+            return response()->json([
+                'status'=>200,
+                'message'=>'product deleted succesfully'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'product ID not found'
+            ]);
+
+        }
     }
 
     // product Stock
