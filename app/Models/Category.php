@@ -11,10 +11,11 @@ class Category extends Model
 
     protected $fillable = [
         'category_name_en',
-        'category_name_es',
-        'category_slug_en',
-        'category_slug_es',
+        'category_name_ar',
+        'category_descripition_en',
+        'category_descripition_ar',
         'category_icon',
+        'status'
         
     ];
 }
