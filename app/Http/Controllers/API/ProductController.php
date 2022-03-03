@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -37,7 +38,22 @@ class ProductController extends Controller
 
     public function EditProduct($id)
     {
-        //
+        $product = Product::find($id);
+    if($product){
+        return response()->json([
+           'status'=>200,
+           'product'=>$product
+
+        ]);
+    }
+    else {
+       return response()->json([
+           'status'=>404,
+           'message'=>'No category id found'
+
+        ]);
+
+    }
     }
 
 

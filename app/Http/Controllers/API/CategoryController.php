@@ -52,7 +52,7 @@ class CategoryController extends Controller
 
     public function CategoryUpdate(Request $request, $id)
     {
-        //
+        
     }
 
     public function CategoryDelete($id)
