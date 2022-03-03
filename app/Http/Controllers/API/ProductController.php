@@ -223,7 +223,22 @@ class ProductController extends Controller
         $product->special_offer=$request->input('special_offer');
         $product->special_deals=$request->input('special_deals');
         $product->digital_file=$request->input('digital_file');
-        $product->status=$request->input('status') == true ? '1':'0';;
+        $product->status=$request->input('status') == true ? '1':'0';
+        if ($request->hasFile('image')) {
+
+            $path = $product->image;
+            if (File::exists($path)) {
+
+                File::delete($path);
+            }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $file->move('uploads/product/', $fileName);
+
+            $product->image = 'uploads/product/' . $fileName;
+        }
+
        $product->update();
        return response()->json([
         'status'=>200,
