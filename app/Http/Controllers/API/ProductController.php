@@ -12,7 +12,7 @@ class ProductController extends Controller
 
     public function AddProduct()
     {
-        return "you can adddddddddd any product with details";
+        return "you can return view";
     }
 
     public function ManageProduct()
@@ -22,38 +22,39 @@ class ProductController extends Controller
 
     public function StoreProduct(Request $request)
     {
+        //
         $validator = Validator::make($request->all(),[
             'brand_id'=>'required',
              'category_id'=>'required',
-            'sub_category_id'=>'required',
-            'product_name_en'=>'required|max:191',
-            'product_name_ar'=>'required|max:191',
-            'product_code'=>'required|max:20',
-            'product_qty'=>'required|max:20',
-            'product_tags_en'=>'required|max:20',
-            'product_tags_ar'=>'required|max:20',
-            'product_size_en'=>'required|max:191',
-            'product_size_ar'=>'required|max:191',
-            'product_color_en'=>'required|max:191',
-            'product_color_ar'=>'required|max:191',
-            'selling_price'=>'required|max:20',
-            'discount_price'=>'required|max:20',
-            'short_description_en'=>'required|max:191',
-            'short_description_ar'=>'required|max:191',
-            'description_en'=>'required|max:191',
-            'description_ar'=>'required|max:191',
-            'product_thumbnail'=>'required',
-            'hot_deals'=>'required',
-            'featured'=>'required',
-            'special_offer'=>'required',
-            'special_deals'=>'required',
-            'digital_file'=>'required',
+            // 'sub_category_id'=>'required',
+            // 'product_name_en'=>'required|max:191',
+            // 'product_name_ar'=>'required|max:191',
+            // 'product_code'=>'required|max:20',
+            // 'product_qty'=>'required|max:20',
+            // 'product_tags_en'=>'required|max:20',
+            // 'product_tags_ar'=>'required|max:20',
+            // 'product_size_en'=>'required|max:191',
+            // 'product_size_ar'=>'required|max:191',
+            // 'product_color_en'=>'required|max:191',
+            // 'product_color_ar'=>'required|max:191',
+            // 'selling_price'=>'required|max:20',
+            // 'discount_price'=>'required|max:20',
+            // 'short_description_en'=>'required|max:191',
+            // 'short_description_ar'=>'required|max:191',
+            // 'description_en'=>'required|max:191',
+            // 'description_ar'=>'required|max:191',
+            // 'product_thumbnail'=>'required',
+            // 'hot_deals'=>'required',
+            // 'featured'=>'required',
+            // 'special_offer'=>'required',
+            // 'special_deals'=>'required',
+            // 'digital_file'=>'required',
 
-           
-            
-            
-    
-            
+
+
+            //'image'=>'required|max:2048|image|mimes:png,jpg,jpeg'
+
+
         ]);
         if($validator->fails()){
             return response()->json([
@@ -89,8 +90,16 @@ class ProductController extends Controller
        $product->special_deals=$request->input('special_deals');
        $product->digital_file=$request->input('digital_file');
        $product->status=$request->input('status') == true ? '1':'0';;
+       if($request->hasFile('image')){
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $filename = time().'.'.$extension;
+        $file->move('uploads/product/',$filename);
+        $product->image ="$filename";
+ 
+    };
 
-       
+
        $product->save();
        return response()->json([
         'status'=>200,
@@ -98,7 +107,6 @@ class ProductController extends Controller
     ]);
             }
     }
-
     public function MultiImageUpdate(Request $request)
     {
 

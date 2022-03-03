@@ -40,6 +40,7 @@ class CreateProductsTable extends Migration
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
             $table->integer('digital_file')->nullable();
+            $table->string('image')->nullable();
             $table->integer('status')->default(0);
 
             $table->timestamps();
