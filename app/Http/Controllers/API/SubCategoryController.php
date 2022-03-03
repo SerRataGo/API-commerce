@@ -43,8 +43,8 @@ class SubCategoryController extends Controller
     public function SubCategoryUpdate(Request $request, $id)
     {
         $request->validate([
-            'subcategory_name_en'=>'required|min:3|unique:sub_category',
-            'subcategory_name_ar'=>'required|min:3|unique:sub_category',
+            'subcategory_name_en'=>'required|min:3|unique:sub_categories',
+            'subcategory_name_ar'=>'required|min:3|unique:sub_categories',
             'category_id'=>'required'
         ]);
 
