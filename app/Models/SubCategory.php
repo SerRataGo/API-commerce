@@ -14,7 +14,7 @@ class SubCategory extends Model
         'category_id',
         'subcategory_name_en',
         'subcategory_name_ar',
-        
+        'subcategory_icon'
     ];
 
     public function Category()

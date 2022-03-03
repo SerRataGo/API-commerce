@@ -18,6 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->integer('category_id');
             $table->string('subcategory_name_en');
             $table->string('subcategory_name_ar');
+            $table->string('subcategory_icon');
             $table->timestamps();
         });
     }
