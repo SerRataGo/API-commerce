@@ -79,7 +79,45 @@ class AdminUserController extends Controller
 
     public function UpdateAdmin(Request $request, $id)
     {
-        //
+        
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required',
+           'password'=>'required',
+           'last_seen'=>'required',
+           
+
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+            }
+else{
+        $user = User::find($id);
+        if($id){
+            $user->name=$request->input('name');
+            $user->email=$request->input('email');
+            $user->phone=$request->input('phone');
+            $user->last_seen=$request->input('last_seen');
+            $user->email_verified_at=$request->input('email_verified_at');
+            $user->password=$request->input('password');
+            $user->current_team_id=$request->input('current_team_id');
+            $user->save();
+           
+        return response()->json([
+            'status'=>200,
+            'message'=>'User updated succesfully'
+        ]);
+    }
+    else {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No User id found'
+        ]);
+    }
+    }
     }
 
     public function DeleteAdmin($id)

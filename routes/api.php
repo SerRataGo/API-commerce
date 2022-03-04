@@ -154,7 +154,7 @@ Route::prefix('adminuserrole')->group(function(){
     Route::get('/add', [AdminUserController::class, 'AddAdminUser'])->name('add-admin');
     Route::post('/store', [AdminUserController::class, 'StoreAdminUser'])->name('store-admin-user');
     Route::get('/edit/{id}', [AdminUserController::class, 'EditAdminUser'])->name('edit-admin-user');
-    Route::post('/update', [AdminUserController::class, 'UpdateAdmin'])->name('update-admin-user');
+    Route::post('/update/{id}', [AdminUserController::class, 'UpdateAdmin'])->name('update-admin-user');
     Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdmin'])->name('delete-admin-user');
 });
 
