@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Coupon;
 
 class CouponController extends Controller
 {
@@ -28,7 +29,22 @@ class CouponController extends Controller
     }
 
     public function DeleteCoupon($id)
-    {
+    {$coupon = Coupon::find($id);
+        if($coupon){
+            $coupon->delete();
+
+            return response()->json([
+                'status'=>200,
+                'message'=>'coupon deleted succesfully'
+            ]);
+        }
+        else{
+            return response()->json([
+                'status'=>404,
+                'message'=>'coupon ID not found'
+            ]);
+
+        }
 
     }
 
