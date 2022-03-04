@@ -16,7 +16,7 @@ class AdminUserController extends Controller
 
     public function AddAdminUser()
     {
-        //
+        //return view of addAdminUser 
     }
 
     public function StoreAdminUser(Request $request)
@@ -26,8 +26,22 @@ class AdminUserController extends Controller
 
     public function EditAdminUser($id)
     {
-        //
+        $user = User::find($id);
+    if($user){
+        return response()->json([
+           'status'=>200,
+           'user'=>$user
+
+        ]);
     }
+    else {
+       return response()->json([
+           'status'=>404,
+           'message'=>'No User id found'
+
+        ]);
+    }
+}
 
     public function UpdateAdmin(Request $request, $id)
     {
