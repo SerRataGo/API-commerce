@@ -72,6 +72,41 @@ else{
 
     public function UpdateCoupon(Request $request, $id)
     {
+        $validator = Validator::make($request->all(),[
+            'coupon_name'=>'required|max:191',
+            'coupon_discount'=>'required',
+            'coupon_validity'=>'required',
+           
+
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+            }
+else{
+        $coupon = Coupon::find($id);
+        if($id){
+            $coupon->coupon_name=$request->input('coupon_name');
+            $coupon->coupon_discount=$request->input('coupon_discount');
+            $coupon->coupon_validity=$request->input('coupon_validity');
+            $coupon->status=$request->input('status')== true ? '1':'0' ;
+            $coupon->save();
+           
+        return response()->json([
+            'status'=>200,
+            'message'=>'coupon updated succesfully'
+        ]);
+    }
+    else {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No coupon id found'
+        ]);
+
+    }
+    }
 
     }
 
