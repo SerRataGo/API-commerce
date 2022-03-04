@@ -231,7 +231,7 @@ Route::prefix('review')->group(function(){
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
 Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
-Route::post('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
+Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.edit');
 Route::get('/user/password/', [IndexController::class, 'UserPassword'])->name('user.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
