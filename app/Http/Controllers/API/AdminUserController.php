@@ -11,7 +11,12 @@ class AdminUserController extends Controller
 
     public function AllAdminRole()
     {
-        //
+        $user = User::all();
+
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+        ]);
     }
 
     public function AddAdminUser()
