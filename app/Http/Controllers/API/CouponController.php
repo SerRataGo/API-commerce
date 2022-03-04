@@ -25,6 +25,22 @@ class CouponController extends Controller
 
     public function EditCoupon($id)
     {
+        $coupon = Coupon::find($id);
+        if($coupon){
+            return response()->json([
+               'status'=>200,
+               'coupon'=>$coupon
+   
+            ]);
+        }
+        else {
+           return response()->json([
+               'status'=>404,
+               'message'=>'No Coupon id found'
+   
+            ]);
+   
+        }
 
     }
 
