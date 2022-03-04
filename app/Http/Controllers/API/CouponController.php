@@ -9,7 +9,12 @@ use App\Models\Coupon;
 class CouponController extends Controller
 {
     public function ViewCoupon()
-    {
+    {  $coupon = Coupon::all();
+
+        return response()->json([
+            'status' => 200,
+            'coupon' => $coupon,
+        ]);
 
     }
 
