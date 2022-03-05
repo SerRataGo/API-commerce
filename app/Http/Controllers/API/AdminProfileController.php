@@ -14,8 +14,32 @@ class AdminProfileController extends Controller
     {
   // return "view"
     }
-    public function AdminCreateProfile()
-    {
+    public function AdminCreateProfile(Request $request)
+    {  $validator = Validator::make($request->all(),[
+        'name'=>'required',
+         'email'=>'required',
+        'password'=>'required',
+        'current_team_id'=>'current_team_id',
+
+    ]);
+    if($validator->fails()){
+        return response()->json([
+            'status'=>422,
+            'errors'=>$validator->messages()
+        ]);
+        }
+        else {
+   $admin = new Admin ;
+   $admin->name=$request->input('name');
+   $admin->email=$request->input('email');
+   $admin->password=$request->input('password');
+   $admin->current_team_id=$request->input('current_team_id');
+   $admin->save();
+   return response()->json([
+    'status'=>200,
+    'message'=>'Admin added succesfully'
+]);}
+
        
     }
 
