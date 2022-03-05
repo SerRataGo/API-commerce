@@ -12,11 +12,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    // use HasApiTokens;
+    // use HasFactory;
+    // use HasProfilePhoto;
+    // use Notifiable;
+    // use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,9 +51,9 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    // protected $appends = [
+    //     'profile_photo_url',
+    // ];
 
 
 }

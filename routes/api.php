@@ -53,7 +53,7 @@ Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.lo
 Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
 Route::get('edit/admin/profile', [AdminProfileController::class, 'EditAdminProfile'])->name('edit.admin.profile');
 Route::post('edit/admin/update', [AdminProfileController::class, 'UpdateAdminProfile'])->name('admin.profile.update');
-Route::post('destory/admin/update', [AdminProfileController::class, 'destoryAdminProfile'])->name('admin.profile.destory');
+Route::delete('destory/admin/{id}', [AdminProfileController::class, 'destoryAdminProfile'])->name('admin.profile.destory');
 Route::get('admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
 Route::post('admin/update/password', [AdminProfileController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
