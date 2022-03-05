@@ -183,14 +183,15 @@ Route::prefix('orders')->group(function(){
 });
 
 //all user activity
-Route::group(['prefix'=>'user', 'middleware' =>['user','auth'],'namespace' =>'User'], function(){
+//add middleware
+Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 
     // Wishlist Routes
     Route::get('/wishlist',[WishlistController::class, 'ViewWishlist'])->name('wishlist');
     // Get wishlist Product
     Route::get('/get-wishlist-product',[WishlistController::class, 'GetWishlistProduct']);
     // wishlist Remove
-    Route::get('wishlist-remove/{id}',[WishlistController::class, 'RemoveWishlistProduct']);
+    Route::delete('/wishlist-remove/{product_id}',[WishlistController::class, 'RemoveWishlistProduct']);
     // Add To Wishlist Button
     Route::post('/add/to/wishlist/{product_id}',[WishlistController::class, 'AddToWishlist']);
 

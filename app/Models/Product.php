@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
+use App\Models\Wishlist;
 
 class Product extends Model
 {
@@ -23,6 +24,10 @@ class Product extends Model
 
     public function cart(){
         return $this->hasMany(Cart::class);
+    }
+
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
     }
 
 }
