@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Rules\UserPasswordRule;
 use DB;
 
 class IndexController extends Controller
@@ -75,7 +76,17 @@ class IndexController extends Controller
 
     public function UserPasswordUpdate(Request $request)
     {
-
+        $request->validate([
+            'new_pass'=>['required','min:3','max:8',new UserPasswordRule],
+            'old_pass'=>['required']
+        ]);
+        $user=User::find($request->id);
+        if($user->password==$request->old_pass){
+            $user->password=$request->new_pass;
+            $user->save();
+            return response()->json("Password Updated");
+        }
+        return response()->json("Your password is not correct");
     }
 
     public function DetailsProduct($id, $slug)
