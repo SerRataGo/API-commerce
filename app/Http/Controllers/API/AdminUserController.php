@@ -84,7 +84,7 @@ class AdminUserController extends Controller
             'name'=>'required',
             'email'=>'required',
            'password'=>'required',
-           'last_seen'=>'required',
+          
            
 
         ]);
@@ -95,26 +95,23 @@ class AdminUserController extends Controller
             ]);
             }
 else{
-        $user = User::find($id);
+        $admin = Admin::find($id);
         if($id){
-            $user->name=$request->input('name');
-            $user->email=$request->input('email');
-            $user->phone=$request->input('phone');
-            $user->last_seen=$request->input('last_seen');
-            $user->email_verified_at=$request->input('email_verified_at');
-            $user->password=$request->input('password');
-            $user->current_team_id=$request->input('current_team_id');
-            $user->save();
+            $admin->name=$request->input('name');
+            $admin->email=$request->input('email');
+            $admin->password=$request->input('password');
+            $admin->current_team_id=$request->input('current_team_id');
+            $admin->save();
            
         return response()->json([
             'status'=>200,
-            'message'=>'User updated succesfully'
+            'message'=>'AdminProfile updated succesfully'
         ]);
     }
     else {
         return response()->json([
             'status'=>404,
-            'message'=>'No User id found'
+            'message'=>'No Admin id found'
         ]);
     }
     }
