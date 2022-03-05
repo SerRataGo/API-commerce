@@ -41,7 +41,7 @@ class CartController extends Controller
         if($cartItem!=null){
 
             DB::table('carts')->where($matchQuery)->limit(1)->update(array('count' => ++$cartItem->count,'updated_at'=>\Carbon\Carbon::now()));
-            return "done";
+            return response()->json("done");
         }
 
         try{
@@ -51,9 +51,9 @@ class CartController extends Controller
         $cartItem->count=1;
         $cartItem->save();
         }catch(Exception $e){
-            return $e;
+            return $e->getMessage();
         }
-        return "done";
+        return response()->json("done");
     }
 
     public function RemoveCartProduct($product_id,Request $request)
@@ -61,8 +61,8 @@ class CartController extends Controller
         $matchQuery=['user_id'=>$request->user_id,'product_id'=>$product_id];
         $deleted = DB::table('carts')->where($matchQuery)->delete();
         if($deleted<1){
-            return "failed";
+            return response()->json("failed");
         }
-        return "deleted successfully";
+        return response()->json("deleted successfully");
     }
 }
