@@ -16,6 +16,21 @@ class AdminProfileController extends Controller
 
     public function EditAdminProfile($id)
     {
+        $admin = Admin::find($id);
+        if($admin){
+            return response()->json([
+               'status'=>200,
+               'admin'=>$admin
+    
+            ]);
+        }
+        else {
+           return response()->json([
+               'status'=>404,
+               'message'=>'No Admin id found'
+    
+            ]);
+        }
 
     }
 
