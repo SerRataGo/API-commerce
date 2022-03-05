@@ -107,7 +107,13 @@ Route::prefix('product')->group(function(){
 // FrontEnd Route Product Details
 Route::get('/product/details/{id}', [IndexController::class, 'DetailsProduct']);
 // Product Search Routes
-Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product-search');
+Route::get('/search/en/{product_name}', [IndexController::class, 'ProductSearchByNameEn'])->name('product-search-name-en');
+Route::get('/search/ar/{product_name}', [IndexController::class, 'ProductSearchByNameAr'])->name('product-search-name-ar');
+Route::get('/search/color/en/{product_color}',[IndexController::class, 'ProductSearchByColorEn'])->name('product-search-color-en');
+Route::get('/search/color/ar/{product_color}',[IndexController::class, 'ProductSearchByColorAr'])->name('product-search-color-ar');
+Route::get('/search/category/en/{product_category}',[IndexController::class, 'ProductSearchByCategoryEn'])->name('product-search-category-en');
+Route::get('/search/category/ar/{product_category}',[IndexController::class, 'ProductSearchByCategoryAr'])->name('product-search-category-ar');
+Route::get('/search/price/{max_product_price}',[IndexController::class, 'ProductSearchByPrice'])->name('product-search-price');
 
 // Admin Reports Routes
 Route::prefix('reports')->group(function(){
