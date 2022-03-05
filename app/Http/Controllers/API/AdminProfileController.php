@@ -104,14 +104,41 @@ else{
 
     }
 
-    public function AdminChangePassword()
-    {
+    // public function AdminChangePassword()
+    // {
+    //  //return view
+    // }
 
-    }
-
-    public function AdminUpdatePassword(Request $request)
+    public function AdminUpdatePassword(Request $request,$id)
     {
-        //code logic
+        $validator = Validator::make($request->all(),[
+        
+           'password'=>'required',
+        ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+            }
+            else{
+                    $admin = Admin::find($id);
+                    if($id){
+                        $admin->password=$request->input('password');
+                        $admin->save();
+                       
+                   return response()->json([
+                        'status'=>200,
+                       'message'=>'Admin password updated succesfully'
+                   ]);
+                }
+                else {
+                    return response()->json([
+                        'status'=>404,
+                        'message'=>'No Admin id found'
+                    ]);
+                }
+            }
     }
 
     public function destoryAdminProfile($id)

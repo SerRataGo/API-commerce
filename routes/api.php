@@ -56,7 +56,7 @@ Route::get('edit/admin/{id}', [AdminProfileController::class, 'EditAdminProfile'
 Route::post('admin/update/{id}', [AdminProfileController::class, 'UpdateAdminProfile'])->name('admin.profile.update');
 Route::delete('destory/admin/{id}', [AdminProfileController::class, 'destoryAdminProfile'])->name('admin.profile.destory');
 Route::get('admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
-Route::post('admin/update/password', [AdminProfileController::class, 'AdminUpdatePassword'])->name('admin.update.password');
+Route::post('admin/update/password/{id}', [AdminProfileController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
 // Admin Get All Users
 Route::prefix('alluser')->group(function(){
