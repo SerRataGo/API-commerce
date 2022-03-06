@@ -39,12 +39,25 @@ class OrderController extends Controller
 
     public function ProcessingOrders()
     {
+        $orders = Order::where('status', 'Processing')->orderBy('id', 'DESC')->get();
+       
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
         
        
     }
 
     public function ConfirmedOrders()
     {
+        $orders = Order::where('status', 'Confirmed')->orderBy('id', 'DESC')->get();
+       
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
+        
 
     }
 
