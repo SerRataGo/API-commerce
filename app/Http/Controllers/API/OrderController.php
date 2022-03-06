@@ -79,6 +79,12 @@ class OrderController extends Controller
 
     public function ShippedOrders()
     {
+        $orders = Order::where('status', 'Shipped')->orderBy('id', 'DESC')->get();
+       
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
         
 
     }
