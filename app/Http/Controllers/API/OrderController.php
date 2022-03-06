@@ -156,7 +156,20 @@ class OrderController extends Controller
     }
 
     public function ProcessingToPicked($order_id)
-    {
+    { $order = Order::findOrFail($order_id);
+        $order->update([
+            'status' => 'Picked',
+        ]);
+
+        $notification = array(
+            'message' => "Order Updated Succesfully",
+            'alert-type' => 'success'
+        ); 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'notification' => $notification,
+        ]);
 
     }
 
