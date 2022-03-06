@@ -63,7 +63,13 @@ class OrderController extends Controller
 
     public function ConfirmedOrdersDetails($order_id)
     {
+        $order = Order::with('user')->where('id', $order_id)->first();
+        $order_item = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+        ]);
     }
 
     public function PickedOrders()
