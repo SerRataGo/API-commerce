@@ -18,8 +18,24 @@ class AllUserController extends Controller
         ]);
     }
 
-    public function DetailsOrder($order_id)
+    public function DetailsOrder($id)
     {
+        $order = Order::find($id);
+        if($order){
+            return response()->json([
+               'status'=>200,
+               'order'=>$order
+   
+            ]);
+        }
+        else {
+           return response()->json([
+               'status'=>404,
+               'message'=>'No order id found'
+   
+            ]);
+   
+        }
 
     }
 

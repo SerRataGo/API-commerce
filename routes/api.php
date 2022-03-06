@@ -182,8 +182,8 @@ Route::prefix('orders')->group(function(){
 
 });
 
-//all user activity
-Route::group(['prefix'=>'user', 'middleware' =>['user','auth'],'namespace' =>'User'], function(){
+//all user activity // 'middleware' =>['user','auth']
+Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 
     // Wishlist Routes
     Route::get('/wishlist',[WishlistController::class, 'ViewWishlist'])->name('wishlist');
@@ -201,7 +201,7 @@ Route::group(['prefix'=>'user', 'middleware' =>['user','auth'],'namespace' =>'Us
 
     // My Profile View Orders
     Route::get('/orders',[AllUserController::class, 'MyOrders'])->name('user.orders');
-    Route::get('/details-order/{orderId}',[AllUserController::class, 'DetailsOrder']);
+    Route::get('/details-order/{order_Id}',[AllUserController::class, 'DetailsOrder']);
     // invoice download
     Route::get('/invoice_download/{order_id}',[AllUserController::class, 'InvoiceDownload']);
     // Route to send the return order reason To database Return Order
