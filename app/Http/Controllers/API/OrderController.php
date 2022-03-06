@@ -102,6 +102,13 @@ class OrderController extends Controller
 
     public function CanceledOrders()
     {
+        $orders = Order::where('status', 'Canceled')->orderBy('id', 'DESC')->get();
+       
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
+
 
     }
 
