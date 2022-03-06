@@ -68,11 +68,18 @@ class OrderController extends Controller
 
     public function PickedOrders()
     {
+        $orders = Order::where('status', 'Picked')->orderBy('id', 'DESC')->get();
+       
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
 
     }
 
     public function ShippedOrders()
     {
+        
 
     }
 
