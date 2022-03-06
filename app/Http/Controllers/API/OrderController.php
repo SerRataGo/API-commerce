@@ -222,6 +222,21 @@ class OrderController extends Controller
 
     public function DeliveredToCanceled($order_id)
     {
+        $order = Order::findOrFail($order_id);
+        $order->update([
+            'status' => 'Canceled',
+        ]);
+
+        $notification = array(
+            'message' => "Order Updated Succesfully",
+            'alert-type' => 'success'
+        ); 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'notification' => $notification,
+        ]);
+
 
     }
 
