@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use  App\Models\Order;
 use  App\Models\OrderItem;
+use  App\Models\Product;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -175,12 +177,47 @@ class OrderController extends Controller
 
     public function PickedToShipped($order_id)
     {
+        $order = Order::findOrFail($order_id);
+        $order->update([
+            'status' => 'Shipped',
+        ]);
 
+        $notification = array(
+            'message' => "Order Updated Succesfully",
+            'alert-type' => 'success'
+        ); 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'notification' => $notification,
+        ]);
     }
 
     public function ShippedToDelivered($order_id)
     {
+        $product = OrderItem::where('order_id', $order_id)->get();
 
+        foreach($product as $item)
+        {
+            Product::where('id', $item->id)->update([
+                'product_qty' => DB::raw('product_qty-'. $item->qty),
+            ]);
+        }
+
+        $order = Order::findOrFail($order_id);
+        $order->update([
+            'status' => 'Delivered',
+        ]);
+
+        $notification = array(
+            'message' => "Order Updated Succesfully",
+            'alert-type' => 'success'
+        ); 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'notification' => $notification,
+        ]);
     }
 
     public function DeliveredToCanceled($order_id)
