@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
 use App\Models\Wishlist;
 use App\Models\SubCategory;
+use App\Models\Review;
 
 class Product extends Model
 {
@@ -33,6 +34,10 @@ class Product extends Model
 
     public function wishlist(){
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function review(){
+        return $this->hasMany(Review::class);
     }
 
 }
