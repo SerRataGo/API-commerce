@@ -104,10 +104,10 @@ else{
 
     }
 
-    // public function AdminChangePassword()
-    // {
-    //  //return view
-    // }
+    public function AdminChangePassword()
+    {
+     //return view
+    }
 
     public function AdminUpdatePassword(Request $request,$id)
     {

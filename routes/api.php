@@ -161,7 +161,6 @@ Route::prefix('adminuserrole')->group(function(){
 
 // Admin Order
 Route::prefix('orders')->group(function(){
-
     Route::get('/order/details/{order_id}', [OrderController::class, 'OrdersDetails'])->name('order.details');
     Route::get('/pending', [OrderController::class, 'PendingOrders'])->name('pending.orders');
     Route::get('/confirmed', [OrderController::class, 'ConfirmedOrders'])->name('confirmed.orders');

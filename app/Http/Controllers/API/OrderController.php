@@ -3,12 +3,27 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use  App\Models\Order;
+use  App\Models\OrderItem;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class OrderController extends Controller
 {
+   
     // Pending Orders
     public function OrdersDetails($order_id)
     {
+        $order = Order::with('user')->where('id', $order_id)->first();
+        $order_item = OrderItem::with('product')->where('order_id', $order_id)->orderBy('id', 'DESC')->get();
+
+
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'order_item'=> $order_item,
+        ]);
 
     }
 
