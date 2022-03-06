@@ -120,7 +120,20 @@ class OrderController extends Controller
 
     public function PendingToConfirm($order_id)
     {
+        $order = Order::findOrFail($order_id);
+        $order->update([
+            'status' => 'Confirmed',
+        ]);
 
+        $notification = array(
+            'message' => "Order Updated Succesfully",
+            'alert-type' => 'success'
+        ); 
+        return response()->json([
+            'status' => 200,
+            'order' => $order,
+            'notification' => $notification,
+        ]);
     }
 
     public function ConfirmedToProcessing($order_id)
