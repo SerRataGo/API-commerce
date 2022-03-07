@@ -4,11 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
+use App\Models\User;
 
 class Review extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $fillable=[
+        'user_id',
+        'product_id',
+        'comment',
+        'status'
+    ];
 
     public function user()
     {
