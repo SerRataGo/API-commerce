@@ -11,6 +11,12 @@ class SliderController extends Controller
 {
     public function ViewSlider()
     {
+        $slider = Slider::all();
+        return response()->json([
+            'status'=>200,
+            'slider'=>$slider
+    
+            ]);
 
     }
 
