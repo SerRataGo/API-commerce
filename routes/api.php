@@ -25,6 +25,8 @@ use App\Http\Controllers\API\LanguageController;
 use App\Http\Controllers\API\SiteSettingController;
 use App\Http\Controllers\API\SubCategoryController;
 use App\Http\Controllers\API\AdminProfileController;
+use App\Http\Controllers\API\Home;
+use App\Http\Controllers\API\PaymentController;
 
 
 /*
@@ -234,6 +236,13 @@ Route::post('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->
 Route::get('/user/password/', [IndexController::class, 'UserPassword'])->name('user.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
+
+
+//payment
+Route::get('/home/paymentsMethodsAndCurrencies',[Home::class,'index']);
+Route::post('/payments/pay',[PaymentController::class,'pay']);
+Route::get('/payments/cancelled',[PaymentController::class,'cancelled']);
+Route::get('/payments/approval',[PaymentController::class,'approval']);
 
 
 
