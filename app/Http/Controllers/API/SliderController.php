@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use App\Models\Slider;
+use Carbon\Carbon;
 
 class SliderController extends Controller
 {
@@ -22,7 +22,34 @@ class SliderController extends Controller
 
     public function StoreSlider(Request $request)
     {
+        $request->validate([
+            'slider_image' => 'required',
 
+        ],[
+            'slider_image.required' => '*Please Insert an Image*',
+            
+        ]);
+
+        $image = $request->file('slider_image');
+        $name_gen = time() .'.'.$image->getClientOriginalExtension();
+        $image->move('uploads/slider/', $name_gen);
+        $save_url = 'uploads/slider/'. $name_gen;
+
+        Slider::insert([
+
+            'slider_image' => $save_url,
+            'slider_title' => $request->slider_title,
+            'slider_description' => $request->slider_description,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+        return response()->json([
+            'status'=>200,
+            'message'=>'Slider added succesfully'
+        ]);
+
+    
     }
 
     public function EditSlider($id)
