@@ -133,7 +133,7 @@ Route::prefix('slider')->group(function(){
     Route::get('/view', [SliderController::class, 'ViewSlider'])->name('view.slider');
     Route::post('/store', [SliderController::class, 'StoreSlider'])->name('store.slider');
     Route::get('/edit/{id}', [SliderController::class, 'EditSlider'])->name('edit.slider');
-    Route::post('/edit/{id}', [SliderController::class, 'UpdateSlider'])->name('update.slider');
+    Route::post('/update/{id}', [SliderController::class, 'UpdateSlider'])->name('update.slider');
     Route::get('/delete/{id}', [SliderController::class, 'DeleteSlider'])->name('delete.slider');
 });
 

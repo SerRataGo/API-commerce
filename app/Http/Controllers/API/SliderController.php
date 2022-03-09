@@ -75,6 +75,43 @@ class SliderController extends Controller
 
     public function UpdateSlider(Request $request, $id)
     {
+        $slider = Slider::find($id);
+ if($slider){
+       $slider->update([
+            'slider_image' => $request->old_image,
+            'slider_title' => $request->slider_title,
+            'slider_description' => $request->slider_description,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+        if($request->file('old_image')){
+
+            unlink($request->old_image);
+            $image = $request->file('slider_image');
+            $name_gen = time().'.'.$image->getClientOriginalExtension();
+            $image->move('uploads/slider/', $name_gen);
+            $save_url = 'uploads/slider/'. $name_gen;
+
+             $slider->update([
+                'slider_image' => $save_url,
+             ]);
+
+        }
+        return response()->json([
+            'status'=>200,
+            'slider'=>$slider
+ 
+         ]);
+    }
+ else {
+    return response()->json([
+        'status'=>404,
+        'message'=>'No slider id found'
+
+     ]);
+ }
+       
 
     }
 
