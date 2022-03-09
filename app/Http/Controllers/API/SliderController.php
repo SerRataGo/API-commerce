@@ -54,6 +54,22 @@ class SliderController extends Controller
 
     public function EditSlider($id)
     {
+        $slider = Slider::find($id);
+        if($slider){
+            return response()->json([
+               'status'=>200,
+               'slider'=>$slider
+    
+            ]);
+        }
+        else {
+           return response()->json([
+               'status'=>404,
+               'message'=>'No slider id found'
+    
+            ]);
+    
+        }
 
     }
 
