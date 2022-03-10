@@ -241,8 +241,8 @@ Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdat
 //payment
 Route::get('/home/paymentsMethodsAndCurrencies',[Home::class,'index']);
 Route::post('/payments/pay',[PaymentController::class,'pay']);
-Route::get('/payments/cancelled',[PaymentController::class,'cancelled']);
-Route::get('/payments/approval',[PaymentController::class,'approval']);
+Route::get('/payments/cancelled',[PaymentController::class,'cancelled'])->name('cancelled');
+Route::get('/payments/approval',[PaymentController::class,'approval'])->name('approval');
 
 
 

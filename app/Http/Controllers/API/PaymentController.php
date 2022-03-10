@@ -5,31 +5,43 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PaymentPlatForm;
+use App\Services\PayPalService;
 use App\Models\Currency;
+use App\Resolvers\PaymentPlatformResolver;
 
 class PaymentController extends Controller
 {
-    public function pay(Request $request)
+    
+    protected $paymentPlatformResolver;
+
+   
+    public function __construct(PaymentPlatformResolver $paymentPlatformResolver)
     {
+      //  $this->middleware('auth');
+
+        $this->paymentPlatformResolver = $paymentPlatformResolver;
+    }
+    public function pay(Request $request)
+    { 
         $rules = [
             'value' => ['required', 'numeric', 'min:5'],
             'currency' => ['required', 'exists:currencies,iso'],
             'payment_platform' => ['required', 'exists:payment_plat_forms,id'],
-        ];
+       ];
 
-        $request->validate($rules);
+         $request->validate($rules);
 
-        // $paymentPlatform = $this->paymentPlatformResolver
-        //     ->resolveService($request->payment_platform);
+        $paymentPlatform = 
+        $this->paymentPlatformResolver->resolveService($request->payment_platform);
 
-        // session()->put('paymentPlatformId', $request->payment_platform);
+       session()->put('paymentPlatformId', $request->payment_platform);
 
-        // if ($request->user()->hasActiveSubscription()) {
-        //     $request->value = round($request->value * 0.9, 2);
-        // }
+        if ($request->user()->hasActiveSubscription()) {
+            $request->value = round($request->value * 0.9, 2);
+        }
 
-        // return $paymentPlatform->handlePayment($request);
-        return $request->all() ;
+        return $paymentPlatform->handlePayment($request);
+       return $request->all() ;
     }
     public function approval()
     {
@@ -40,14 +52,15 @@ class PaymentController extends Controller
             return $paymentPlatform->handleApproval();
         }
 
-        return redirect()
-            ->route('home')
-            ->withErrors('We cannot retrieve your payment platform. Try again, please.');
+        
     }
 
     public function cancelled()
     {
-        return "Canceelled Successfully";
+        return response()->json([
+            'status'=>200,
+            'message'=>'Cancel the Payment  succesfully'
+        ]);
     }
 
 }
