@@ -28,9 +28,13 @@ class ReportController extends Controller
         ]);
     }
 
-    public function ReportSearchByMonth()
+    public function ReportSearchByMonth(Request $request)
     {
-        //
+        $orders = Order::where('order_month', $request->month)->where('order_year', $request->year_name)->latest()->get();
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
     }
     public function ReportSearchByYear()
     {
