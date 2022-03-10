@@ -36,12 +36,13 @@ class ReportController extends Controller
             'orders' => $orders,
         ]);
     }
-    public function ReportSearchByYear()
+    public function ReportSearchByYear(Request $request)
     {
-        //
+        $orders = Order::where('order_year', $request->year)->latest()->get();
+        return response()->json([
+            'status' => 200,
+            'orders' => $orders,
+        ]);
     }
-    public function ReportSearchByColor()
-    {
-        //
-    }
+   
 }
