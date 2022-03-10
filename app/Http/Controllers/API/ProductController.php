@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\MultiImage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Color;
 
 class ProductController extends Controller
 {
@@ -315,5 +316,21 @@ class ProductController extends Controller
     public function ProductStock()
     {
 
+    }
+    public function showProductColor($id)
+    {
+        $product = Product::find($id);
+
+        if (is_null($product)) {
+            return $this->sendError('Product not found.');
+        }
+
+        $productColor = Color::where('id', '=', $product->color_id)->first();
+
+        if (is_null($productColor)) {
+            return $this->sendError('Product Color not found.');
+        }
+
+        return $this->sendResponse($productColor->toArray(), 'Product Color retrieved successfully.');
     }
 }

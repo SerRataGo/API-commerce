@@ -115,7 +115,7 @@ Route::prefix('reports')->group(function(){
     Route::post('/search/by/date', [ReportController::class, 'ReportSearchByDate'])->name('search-by-date');
     Route::post('/search/by/month', [ReportController::class, 'ReportSearchByMonth'])->name('search-by-month');
     Route::post('/search/by/year', [ReportController::class, 'ReportSearchByYear'])->name('search-by-year');
-    Route::post('/search/by/color', [ReportController::class, 'ReportSearchByColor'])->name('search-by-color');
+    //Route::post('/search/by/color', [ReportController::class, 'ReportSearchByColor'])->name('search-by-color');
 
 });
 
