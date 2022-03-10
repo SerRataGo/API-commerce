@@ -6,21 +6,17 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Cache;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Cart;
-use App\Models\Wishlist;
-use App\Models\Review;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    //use HasProfilePhoto;
+    use HasProfilePhoto;
     use Notifiable;
-    //use TwoFactorAuthenticatable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,12 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'phone',
         'password',
-        'last_seen',
-        'address',
-        'city',
-        'region'
     ];
 
     /**
@@ -67,24 +58,4 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-
-    // user active show
-
-    public function UserOnline()
-    {
-        return Cache::has('user-is-online' . $this->id);
-    }
-
-    public function cart(){
-        return $this->hasMany(Cart::class);
-    }
-    
-    public function wishlist(){
-        return $this->hasMany(Wishlist::class);
-    }
-
-    public function review(){
-        return $this->hasMany(Review::class);
-    }
 }
-

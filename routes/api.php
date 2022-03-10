@@ -27,6 +27,7 @@ use App\Http\Controllers\API\SubCategoryController;
 use App\Http\Controllers\API\AdminProfileController;
 use App\Http\Controllers\API\ContactUsController;
 use App\Http\Controllers\API\RateController;
+use App\Http\Controllers\API\EmailVerificationController;
 
 
 /*
@@ -268,6 +269,8 @@ Route::delete('/cart/{product_id}',[CartController::class,'RemoveCartProduct']);
 Route::post('/rate/product/{product_id}',[RateController::class,'AddProductRate'])->name('rate.product');
 Route::delete('/rate/delete/{product_id}',[RateController::class,'DeleteProductRate'])->name('delete.product.rate');
 
+//email verification
+Route::post('/verify/email',[EmailVerificationController::class,'SendVerificationEmail'])->name('send.verification.email');
 
 
 
