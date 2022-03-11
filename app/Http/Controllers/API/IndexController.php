@@ -5,7 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\CategoryProductsEn;
+use App\Http\Resources\CategoryProductsAr;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Product;
 use App\Rules\UserPasswordRule;
 use DB;
 
@@ -117,10 +122,41 @@ class IndexController extends Controller
 
     }
 
-    public function ProductSearch(Request $request)
+    public function ProductSearchByNameEn($product_name)
     {
+        $products=DB::table('products')->where('product_name_en','like','%'.$product_name.'%')->get();
+        return $products;
+    }
 
+    public function ProductSearchByNameAr($product_name)
+    {
+        $products=DB::table('products')->where('product_name_es','like','%'.$product_name.'%')->get();
+        return $products;
+    }
 
+    public function ProductSearchByColorEn($product_color){
+        $products=DB::table('products')->where('product_color_en','like','%'.$product_color.'%')->get();
+        return $products;
+    }
+
+    public function ProductSearchByColorAr($product_color){
+        $products=DB::table('products')->where('product_color_es','like','%'.$product_color.'%')->get();
+        return $products;
+    }
+
+    public function ProductSearchByCategoryEn($product_category){
+        $categories=Category::where('category_name_en','like','%'.$product_category.'%')->get();
+        return CategoryProductsEn::collection($categories);
+    }
+
+    public function ProductSearchByCategoryAr($product_category){
+        $categories=Category::where('category_name_es','like','%'.$product_category.'%')->get();
+        return CategoryProductsAr::collection($categories);
+    }
+
+    public function ProductSearchByPrice($max_product_price){
+        $products=Product::where('selling_price','<=',$max_product_price)->get();
+        return $products;
     }
 
 }
