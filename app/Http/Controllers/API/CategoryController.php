@@ -60,24 +60,24 @@ else{
             return response()->json([
                'status'=>200,
                'category'=>$category
-   
+
             ]);
         }
         else {
            return response()->json([
                'status'=>404,
                'message'=>'No category id found'
-   
+
             ]);
-   
+
         }
     }
 
+
     public function CategoryUpdate(Request $request, $id)
     {
-/*
-        
-=======
+
+
         $validator = Validator::make($request->all(),[
             'category_name_en'=>'required|max:191',
             'category_name_ar'=>'required|max:191',
@@ -114,9 +114,11 @@ else{
         ]);
 
     }
-    }
-*/
-    }
+
+
+
+
+
 
     public function CategoryDelete($id)
     {
