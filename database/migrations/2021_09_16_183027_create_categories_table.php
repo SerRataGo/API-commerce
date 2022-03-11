@@ -16,10 +16,11 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category_name_en');
-            $table->string('category_name_es');
-            $table->string('category_slug_en');
-            $table->string('category_slug_es');
+            $table->string('category_name_ar');
+            $table->string('category_descripition_en');
+            $table->string('category_descripition_ar');
             $table->string('category_icon');
+            $table->int('status')->default('0');
             $table->timestamps();
         });
     }

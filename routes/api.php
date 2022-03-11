@@ -52,11 +52,12 @@ Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.lo
 // admin Profile Controller
 
 Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
-Route::get('edit/admin/profile', [AdminProfileController::class, 'EditAdminProfile'])->name('edit.admin.profile');
-Route::post('edit/admin/update', [AdminProfileController::class, 'UpdateAdminProfile'])->name('admin.profile.update');
-Route::post('destory/admin/update', [AdminProfileController::class, 'destoryAdminProfile'])->name('admin.profile.destory');
+Route::post('/admin/profile', [AdminProfileController::class, 'AdminCreateProfile'])->name('admin.create.profile');
+Route::get('edit/admin/{id}', [AdminProfileController::class, 'EditAdminProfile'])->name('edit.admin.profile');
+Route::post('admin/update/{id}', [AdminProfileController::class, 'UpdateAdminProfile'])->name('admin.profile.update');
+Route::delete('destory/admin/{id}', [AdminProfileController::class, 'destoryAdminProfile'])->name('admin.profile.destory');
 Route::get('admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
-Route::post('admin/update/password', [AdminProfileController::class, 'AdminUpdatePassword'])->name('admin.update.password');
+Route::post('admin/update/password/{id}', [AdminProfileController::class, 'AdminUpdatePassword'])->name('admin.update.password');
 
 // Admin Get All Users
 Route::prefix('alluser')->group(function(){
@@ -92,14 +93,14 @@ Route::get('subcategory/{subcat_id}', [IndexController::class, 'SubCatProduct'])
 
 // Admin Products All Routes
 Route::prefix('product')->group(function(){
-
+    Route::get('/view', [ProductController::class, 'index'])->name('view.product');
     Route::get('/add', [ProductController::class, 'AddProduct'])->name('add.product');
     Route::post('/store', [ProductController::class, 'StoreProduct'])->name('store.product');
     Route::get('/manage', [ProductController::class, 'ManageProduct'])->name('manage.product');
     Route::get('/edit/{id}', [ProductController::class, 'EditProduct'])->name('product.edit');
     Route::post('/data/update/{id}', [ProductController::class, 'UpdateProduct'])->name('product.update');
     Route::get('/delete/{id}', [ProductController::class, 'DeleteProduct'])->name('product.delete');
-    Route::post('/image/update/', [ProductController::class, 'MultiImageUpdate'])->name('update.product_image');
+    Route::post('/image/update', [ProductController::class, 'MultiImageUpdate'])->name('update.product_image');
     Route::get('/multiimage/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product.multiimage_delete');
 
 });
@@ -161,14 +162,14 @@ Route::prefix('adminuserrole')->group(function(){
     Route::get('/add', [AdminUserController::class, 'AddAdminUser'])->name('add-admin');
     Route::post('/store', [AdminUserController::class, 'StoreAdminUser'])->name('store-admin-user');
     Route::get('/edit/{id}', [AdminUserController::class, 'EditAdminUser'])->name('edit-admin-user');
-    Route::post('/update', [AdminUserController::class, 'UpdateAdmin'])->name('update-admin-user');
+    Route::post('/update/{id}', [AdminUserController::class, 'UpdateAdmin'])->name('update-admin-user');
     Route::get('/delete/{id}', [AdminUserController::class, 'DeleteAdmin'])->name('delete-admin-user');
 });
 
 // Admin Order
 Route::prefix('orders')->group(function(){
-
     Route::get('/order/details/{order_id}', [OrderController::class, 'OrdersDetails'])->name('order.details');
+    Route::get('/order/ConfirmedOrderDetails/{order_id}', [OrderController::class, 'ConfirmedOrdersDetails'])->name('confirmedOrder.details');
     Route::get('/pending', [OrderController::class, 'PendingOrders'])->name('pending.orders');
     Route::get('/confirmed', [OrderController::class, 'ConfirmedOrders'])->name('confirmed.orders');
     Route::get('/processing', [OrderController::class, 'ProcessingOrders'])->name('processing.orders');
@@ -184,12 +185,11 @@ Route::prefix('orders')->group(function(){
     Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processed-picked');
     Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked-shipped');
     Route::get('shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped-delivered');
-    Route::get('delivered/canceled{order_id}', [OrderController::class, 'DeliveredToCanceled'])->name('delivered-canceled');
+    Route::get('delivered/canceled/{order_id}', [OrderController::class, 'DeliveredToCanceled'])->name('delivered-canceled');
 
 });
 
-//all user activity
-//add middleware
+
 Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 
     // Wishlist Routes
@@ -208,7 +208,7 @@ Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 
     // My Profile View Orders
     Route::get('/orders',[AllUserController::class, 'MyOrders'])->name('user.orders');
-    Route::get('/details-order/{orderId}',[AllUserController::class, 'DetailsOrder']);
+    Route::get('/details-order/{order_Id}',[AllUserController::class, 'DetailsOrder']);
     // invoice download
     Route::get('/invoice_download/{order_id}',[AllUserController::class, 'InvoiceDownload']);
     // Route to send the return order reason To database Return Order
