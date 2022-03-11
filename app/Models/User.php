@@ -12,11 +12,18 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    // use HasApiTokens;
+    // use HasFactory;
+    // use HasProfilePhoto;
+    // use Notifiable;
+    // use TwoFactorAuthenticatable;
+=======
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -46,16 +53,41 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
+/*
     protected $appends = [
         'profile_photo_url',
     ];
+=======
+    //protected $appends = [
+       // 'profile_photo_url',
+    //];
+
+    // user active show
+
+    // public function UserOnline()
+    // {
+    //     return Cache::has('user-is-online' . $this->id);
+    // }
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
+    
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function review(){
+        return $this->hasMany(Review::class);
+    }
+*/
 }
