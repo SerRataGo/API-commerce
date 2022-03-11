@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Cart;
+use App\Models\Wishlist;
 
 class User extends Authenticatable
 {
@@ -77,5 +78,8 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class);
     }
     
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
 }
 
