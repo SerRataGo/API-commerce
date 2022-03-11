@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Cache;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Cart;
+use App\Models\Wishlist;
 
 class User extends Authenticatable
 {
@@ -18,6 +20,13 @@ class User extends Authenticatable
     // use HasProfilePhoto;
     // use Notifiable;
     // use TwoFactorAuthenticatable;
+=======
+    use HasApiTokens;
+    use HasFactory;
+    //use HasProfilePhoto;
+    use Notifiable;
+    //use TwoFactorAuthenticatable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +38,10 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'last_seen'
+        'last_seen',
+        'address',
+        'city',
+        'region'
     ];
 
     /**
@@ -69,6 +81,12 @@ class User extends Authenticatable
     //     return Cache::has('user-is-online' . $this->id);
     // }
 
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
     
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
+    }
 }
 

@@ -25,6 +25,7 @@ use App\Http\Controllers\API\LanguageController;
 use App\Http\Controllers\API\SiteSettingController;
 use App\Http\Controllers\API\SubCategoryController;
 use App\Http\Controllers\API\AdminProfileController;
+use App\Http\Controllers\API\ContactUsController;
 
 
 /*
@@ -79,12 +80,12 @@ Route::prefix('category')->group(function(){
     Route::post('/sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
     Route::get('/sub/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('subcategory.edit');
     Route::post('/sub/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
-    Route::get('sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
+    Route::delete('sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
 
 
 });
 
-// category Frontend  reteun all product in this category
+// category Frontend  return all product in this category
 Route::get('subcategory/{subcat_id}', [IndexController::class, 'SubCatProduct']);
 
 // Subcategory Frontend  reteun all product in this subcategory
@@ -182,7 +183,7 @@ Route::prefix('orders')->group(function(){
 
 });
 
-//all user activity // 'middleware' =>['user','auth']
+
 Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 
     // Wishlist Routes
@@ -190,7 +191,7 @@ Route::group(['prefix'=>'user','namespace' =>'User'], function(){
     // Get wishlist Product
     Route::get('/get-wishlist-product',[WishlistController::class, 'GetWishlistProduct']);
     // wishlist Remove
-    Route::get('wishlist-remove/{id}',[WishlistController::class, 'RemoveWishlistProduct']);
+    Route::delete('/wishlist-remove/{product_id}',[WishlistController::class, 'RemoveWishlistProduct']);
     // Add To Wishlist Button
     Route::post('/add/to/wishlist/{product_id}',[WishlistController::class, 'AddToWishlist']);
 
@@ -231,9 +232,27 @@ Route::prefix('review')->group(function(){
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
 Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
-Route::post('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
+Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.edit');
 Route::get('/user/password/', [IndexController::class, 'UserPassword'])->name('user.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+//all contact us functions
+//admin
+Route::get('/contact_us',[ContactUsController::class,'viewAllContactUs'])->name('view.allcontactus');
+Route::get('/contact_us/{id}',[ContactUsController::class,'showSubmission'])->name('view.contactus.submission');
+Route::delete('/contact_us/{id}',[ContactUsController::class,'deleteSubmission'])->name('delete.contactus.submission');
+
+//user
+Route::post('/contact_us',[ContactUsController::class,'addContactSubmission'])->name('add.contactus.submission');
+
+//Cart functions
+//admin
+Route::get('/cart',[CartController::class,'viewAllCarts']);
+//user's cart functions 
+Route::post('/cart/{product_id}',[CartController::class,'addProductToCart']);
+Route::get('/user/cart',[CartController::class,'MyCart']);
+Route::delete('/cart/{product_id}',[CartController::class,'RemoveCartProduct']);
+
 
 
 
