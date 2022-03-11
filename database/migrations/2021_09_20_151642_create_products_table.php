@@ -19,6 +19,9 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->nullable();
             $table->integer('sub_category_id');
 
+            $table->string('product_name_en');
+
+
             /*
             $table->integer('sub_sub_category_id')->nullable();
             $table->string('product_name_en');
@@ -55,13 +58,17 @@ class CreateProductsTable extends Migration
             $table->string('short_description_ar');
             $table->string('description_en');
             $table->string('description_ar');
+
+
             */
+
             $table->string('product_thumbnail');
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
             $table->integer('digital_file')->nullable();
+            $table->string('image')->nullable();
             $table->integer('status')->default(0);
 
             $table->timestamps();
