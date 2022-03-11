@@ -79,12 +79,12 @@ Route::prefix('category')->group(function(){
     Route::post('/sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
     Route::get('/sub/edit/{id}', [SubCategoryController::class, 'SubCategoryEdit'])->name('subcategory.edit');
     Route::post('/sub/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
-    Route::get('sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
+    Route::delete('sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
 
 
 });
 
-// category Frontend  reteun all product in this category
+// category Frontend  return all product in this category
 Route::get('subcategory/{subcat_id}', [IndexController::class, 'SubCatProduct']);
 
 // Subcategory Frontend  reteun all product in this subcategory
@@ -231,7 +231,7 @@ Route::prefix('review')->group(function(){
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
 Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
-Route::post('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
+Route::post('/user/profile/update', [IndexController::class, 'UserProfileUpdate'])->name('user.profile.edit');
 Route::get('/user/password/', [IndexController::class, 'UserPassword'])->name('user.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
@@ -243,6 +243,14 @@ Route::delete('/contact_us/{id}',[ContactUsController::class,'deleteSubmission']
 
 //user
 Route::post('/contact_us',[ContactUsController::class,'addContactSubmission'])->name('add.contactus.submission');
+
+//Cart functions
+//admin
+Route::get('/cart',[CartController::class,'viewAllCarts']);
+//user's cart functions 
+Route::post('/cart/{product_id}',[CartController::class,'addProductToCart']);
+Route::get('/user/cart',[CartController::class,'MyCart']);
+Route::delete('/cart/{product_id}',[CartController::class,'RemoveCartProduct']);
 
 
 
