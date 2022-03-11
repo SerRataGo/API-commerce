@@ -26,6 +26,7 @@ use App\Http\Controllers\API\SiteSettingController;
 use App\Http\Controllers\API\SubCategoryController;
 use App\Http\Controllers\API\AdminProfileController;
 use App\Http\Controllers\API\ContactUsController;
+use App\Http\Controllers\API\RateController;
 
 
 /*
@@ -263,6 +264,9 @@ Route::post('/cart/{product_id}',[CartController::class,'addProductToCart']);
 Route::get('/user/cart',[CartController::class,'MyCart']);
 Route::delete('/cart/{product_id}',[CartController::class,'RemoveCartProduct']);
 
+//Rate functions 
+Route::post('/rate/product/{product_id}',[RateController::class,'AddProductRate'])->name('rate.product');
+Route::delete('/rate/delete/{product_id}',[RateController::class,'DeleteProductRate'])->name('delete.product.rate');
 
 
 
