@@ -12,6 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Cart;
 use App\Models\Wishlist;
+use App\Models\Review;
 
 class User extends Authenticatable
 {
@@ -87,6 +88,10 @@ class User extends Authenticatable
     
     public function wishlist(){
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function review(){
+        return $this->hasMany(Review::class);
     }
 }
 

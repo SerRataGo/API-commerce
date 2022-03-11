@@ -224,13 +224,17 @@ Route::group(['prefix'=>'user','namespace' =>'User'], function(){
 // Admin Manage Review Routes
 Route::prefix('review')->group(function(){
 
+    Route::post('/store', [ReviewController::class, 'StoreReview'])->name('store-review');
+
     Route::get('/pending', [ReviewController::class, 'PendingReview'])->name('pending-review');
 
-    Route::get('/approve/{id}', [ReviewController::class, 'ApproveReview'])->name('approve-review');
+    Route::post('/approve/{id}', [ReviewController::class, 'ApproveReview'])->name('approve-review');
 
     Route::get('/approved', [ReviewController::class, 'AllReviewsApproved'])->name('approved-review');
 
-    Route::get('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete-review');
+    Route::delete('/delete/{id}', [ReviewController::class, 'DeleteReview'])->name('delete-review');
+
+    Route::get('/product/{product_id}', [ReviewController::class, 'GetProductReviews'])->name('get-product-reviews');
 
 });
 
